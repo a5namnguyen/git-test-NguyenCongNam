@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tour</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/pannellum@2.5.6/build/pannellum.js"
+    ></script>
+    <style>
+      #panorama-container {
+        display: flex;
+      }
+      #panorama {
+        width: 80%;
+        height: 100vh;
+      }
+      #hotspot-container {
+        width: 20%;
+        background-color: #ccc;
+      }
+      .hotspot {
+        display: block;
+        text-align: center;
+        margin: 10px 0;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="panorama-container">
+      <div id="panorama"></div>
+      <div id="hotspot-container">
+        <a
+          href="#"
+          class="hotspot"
+          data-scene="Point1"
+          >Điểm 1</a
+        >
+        <a
+          href="#"
+          class="hotspot"
+          data-scene="Point2"
+          >Điểm 2</a
+        >
+        <a
+          href="#"
+          class="hotspot"
+          data-scene="Point3"
+          >Điểm 3</a
+        >
+        <a
+          href="#"
+          class="hotspot"
+          data-scene="Point4"
+          >Điểm 4</a
+        >
+        <a
+          href="#"
+          class="hotspot"
+          data-scene="Point5"
+          >Điểm 5</a
+        >
+      </div>
+    </div>
+    <script>
+      var viewer = pannellum.viewer("panorama", {
+        default: {
+          firstScene: "Point1",
+          author: "",
+          sceneFadeDuration: 1000,
+        },
+        scenes: {
+          Point1: {
+            title: "Điểm 1",
+            hfov: 110,
+            pitch: -3,
+            yaw: 60,
+            type: "equirectangular",
+            panorama: "/img/photo_2023-11-09_10-23-30.jpg",
+            hotSpots: [
+              {
+                pitch: -1,
+                yaw: 325.9,
+                type: "scene",
+                text: "Điểm 2",
+                sceneId: "Point2",
+              },
+            ],
+          },
+          Point2: {
+            title: "Điểm 2",
+            hfov: 110,
+            yaw: 5,
+            type: "equirectangular",
+            panorama: "/img/photo_2023-11-09_10-30-33.jpg",
+            hotSpots: [
+              {
+                pitch: -1,
+                yaw: 5.1,
+                type: "scene",
+                text: "Điểm 3",
+                sceneId: "Point3",
+                targetYaw: -23,
+                targetPitch: 2,
+              },
+            ],
+          },
+          Point3: {
+            title: "Điểm 3",
+            hfov: 110,
+            yaw: 5,
+            type: "equirectangular",
+            panorama: "/img/photo_2023-11-09_10-30-40.jpg",
+            hotSpots: [
+              {
+                pitch: -1,
+                yaw: 10.1,
+                type: "scene",
+                text: "Điểm 4",
+                sceneId: "Point4",
+                targetYaw: -23,
+                targetPitch: 2,
+              },
+            ],
+          },
+          Point4: {
+            title: "Điểm 4",
+            hfov: 110,
+            yaw: 5,
+            type: "equirectangular",
+            panorama: "/img/photo_2023-11-09_10-30-45.jpg",
+            hotSpots: [
+              {
+                pitch: -1,
+                yaw: 5.1,
+                type: "scene",
+                text: "Điểm 5",
+                sceneId: "Point5",
+                targetYaw: -23,
+                targetPitch: 2,
+              },
+            ],
+          },
+          Point5: {
+            title: "Điểm 5",
+            hfov: 110,
+            yaw: 5,
+            type: "equirectangular",
+            panorama: "/img/photo_2023-11-09_10-30-49.jpg",
+            hotSpots: [
+              {
+                pitch: -1,
+                yaw: 190.1,
+                type: "scene",
+                text: "Điểm 1",
+                sceneId: "Point1",
+                targetYaw: -23,
+                targetPitch: 2,
+              },
+            ],
+          },
+        },
+      });
+
+      // Add click event listeners to hotspots
+      var hotspots = document.querySelectorAll(".hotspot");
+      hotspots.forEach(function (hotspot, index) {
+        hotspot.addEventListener("click", function (e) {
+          e.preventDefault();
+          var sceneName = hotspot.getAttribute("data-scene");
+          viewer.loadScene(sceneName);
+        });
+      });
+    </script>
+  </body>
+</html>
